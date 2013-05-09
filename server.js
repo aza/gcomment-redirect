@@ -23,10 +23,8 @@ app.get('/:id/:title', function(req, res){
       query = req.query,
       title  = req.params.title[0].replace(/\+/g, ' ').toUpperCase()
 
-  var isGoogle = req.headers['user-agent'].match(/Google/i)
-
   var page =  '<html itemscope itemtype="http://schema.org/Blog">'
-      page += '<span itemprop="name">' + title + '</span>'
+      page += '<div style="position:absolute;top:-1000px;left:-1000px;"><span itemprop="name">' + title + '</span>'
       page += '<span itemprop="description">Read more on the Jawbone Jibber Jabber</span>'
       
 
@@ -48,21 +46,15 @@ app.get('/:id/:title', function(req, res){
   ]
 
   var imageUrl = images[Math.floor(images.length*Math.random())]
-  page += '<img itemprop="image" src="'+imageUrl+'">'
+  page += '<img itemprop="image" src="'+imageUrl+'"></div>'
   page += '<script>window.location.href="http://blog.aliph.com/?p='+postId + '"</script>'
 
-  //if( isGoogle )
   res.send(page)
-  //else
-  //  res.redirect('http://blog.aliph.com/?p='+postId)
-
-  //res.send('boom!' + req.params.all[0])
-  //console.log( req.params.all[0], req.query )
 })
 
 
 app.get('/', function(req, res){
-  res.send('Ohai!')
+  res.send('Welcome To The Redirector')
 })
 
 app.listen(3000)
