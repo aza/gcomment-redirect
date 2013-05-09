@@ -27,8 +27,28 @@ app.get('/:id/:title', function(req, res){
 
   var page =  '<html itemscope itemtype="http://schema.org/Blog">'
       page += '<span itemprop="name">' + title + '</span>'
-      page += '<span itemprop="description">Read more on the Jawbone Jibber Jabber!</span>'
-      page += '<img itemprop="image" src="https://d3osil7svxrrgt.cloudfront.net/static/www/product-images/bigjambox/press/bigjambox-display-006.jpg">'
+      page += '<span itemprop="description">Read more on the Jawbone Jibber Jabber</span>'
+      
+
+  var images = [
+    "https://d3osil7svxrrgt.cloudfront.net/static/www/product-images/bigjambox/press/bigjambox-display-006.jpg", //white jambox
+    "https://d3osil7svxrrgt.cloudfront.net/static/www/product-images/up/press/up/up-by-jawbone-display-016.jpg", //up rainbow
+    "https://d3osil7svxrrgt.cloudfront.net/static/www/product-images/up/press/up/up-by-jawbone-display-015.jpg", //up stack
+    "https://d3osil7svxrrgt.cloudfront.net/static/www/product-images/bigjambox/press/bigjambox-display-013.jpg", //jambox stack
+    "https://d3osil7svxrrgt.cloudfront.net/static/www/product-images/jambox/press/jambox-display-011.jpg", //jambox red
+    "https://d3osil7svxrrgt.cloudfront.net/static/www/product-images/jambox/press/jambox-display-007.jpg", //jambox blue
+    "https://d3osil7svxrrgt.cloudfront.net/static/www/product-images/jambox/press/jambox-display-005.jpg", //jambox black
+    "https://d3osil7svxrrgt.cloudfront.net/static/www/product-images/iconhd/press/iconhd-display-001.jpg", //icon +nerd
+    "https://d3osil7svxrrgt.cloudfront.net/static/www/product-images/icon/press/icon-display-010.jpg", //"bombshell",
+    "https://d3osil7svxrrgt.cloudfront.net/static/www/product-images/icon/press/icon-display-013.jpg", //rogue
+    "https://d3osil7svxrrgt.cloudfront.net/static/www/product-images/up/press/up/up-by-jawbone-display-002.jpg", //mint-green up,
+    "https://d3osil7svxrrgt.cloudfront.net/static/www/product-images/era/press/era-display-010.jpg", //smokescreen
+    "https://d3osil7svxrrgt.cloudfront.net/static/www/product-images/bigjambox/press/bigjambox-display-002.jpg", //graphite hex jambox
+    "https://d3osil7svxrrgt.cloudfront.net/static/www/product-images/up/press/up/up-by-jawbone-display-010.jpg" //light grey up
+  ]
+
+  var imageUrl = images[Math.floor(images.length*Math.random())]
+  page += '<img itemprop="image" src="'+imageUrl+'">'
 
   if( isGoogle )
     res.send(page)
