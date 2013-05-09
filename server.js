@@ -21,7 +21,7 @@ app.param('title', /(.+)$/)
 app.get('/:id/:title', function(req, res){
   var postId = req.params.id[0],
       query = req.query,
-      title  = req.params.title[0]
+      title  = req.params.title[0].replace(/\+/g, ' ').toUpperCase()
 
   var isGoogle = req.headers['user-agent'].match(/Google/i)
 
@@ -49,12 +49,12 @@ app.get('/:id/:title', function(req, res){
 
   var imageUrl = images[Math.floor(images.length*Math.random())]
   page += '<img itemprop="image" src="'+imageUrl+'">'
-  page += '<meta http-equiv="refresh" content="0;URL=\'' + 'http://blog.aliph.com/?p='+postId + '\'">'
+  page += '<script>window.location.href="http://blog.aliph.com/?p='+postId + '"</script>'
 
-  if( isGoogle )
-    res.send(page)
-  else
-    res.redirect('http://blog.aliph.com/?p='+postId)
+  //if( isGoogle )
+  res.send(page)
+  //else
+  //  res.redirect('http://blog.aliph.com/?p='+postId)
 
   //res.send('boom!' + req.params.all[0])
   //console.log( req.params.all[0], req.query )
