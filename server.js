@@ -49,6 +49,7 @@ app.get('/:id/:title', function(req, res){
 
   var imageUrl = images[Math.floor(images.length*Math.random())]
   page += '<img itemprop="image" src="'+imageUrl+'">'
+  page += '<meta http-equiv="refresh" content="0;URL=\'' + 'http://blog.aliph.com/?p='+postId + '\'">'
 
   if( isGoogle )
     res.send(page)
