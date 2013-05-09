@@ -16,17 +16,22 @@ app.param(function(name, fn){
 });
 
 
-app.param('all', /(\d+)$/)
-app.get('/:all', function(req, res){
-  var postId = req.params.all[0],
-      query = req.query
-
-  if( !query.body ) query.body = ""
+app.param('id', /(\d+)/)
+app.param('title', /(.+)$/)
+app.get('/:id/:title', function(req, res){
+  var postId = req.params.id[0],
+      query = req.query,
+      title  = req.params.title[0]
 
   var isGoogle = req.headers['user-agent'].match(/Google/i)
 
+  var page =  '<html itemscope itemtype="http://schema.org/Blog">'
+      page += '<span itemprop="name">' + title + '</span>'
+      page += '<span itemprop="description">Read more on the Jawbone Jibber Jabber!</span>'
+      page += '<img itemprop="image" src="https://d3osil7svxrrgt.cloudfront.net/static/www/product-images/bigjambox/press/bigjambox-display-006.jpg">'
+
   if( isGoogle )
-    res.send('<h1>'+query.title+'</h1><p>'+query.body+'</p>')
+    res.send(page)
   else
     res.redirect('http://blog.aliph.com/?p='+postId)
 
@@ -36,7 +41,7 @@ app.get('/:all', function(req, res){
 
 
 app.get('/', function(req, res){
-  res.send('hi')
+  res.send('Ohai!')
 })
 
 app.listen(3000)
